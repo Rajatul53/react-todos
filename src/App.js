@@ -7,6 +7,8 @@ import NewTodoForm from './components/NewTodoForm';
 
 function App() {
 
+  const [showAddTodoForm, setShowTodoForm] = useState(false);
+
   const addTodo = (description, assigned) => {
     let rowNumber = 0;
     if (todos.length > 0) {
@@ -43,10 +45,13 @@ function App() {
         </div>
         <div className="card-body">
           <TodoTable todos={todos} deleteTodo={deleteTodo} />
-          <button className='btn btn-primary'>
-            Add New Todo
+          <button
+            onClick={() => setShowTodoForm(!showAddTodoForm)}
+            className='btn btn-primary'>
+            {showAddTodoForm ? 'Close New Todo' : 'New Todo'}
           </button>
-          <NewTodoForm addTodo={addTodo} />
+          {showAddTodoForm &&
+            <NewTodoForm addTodo={addTodo} />}
         </div>
       </div>
     </div>
